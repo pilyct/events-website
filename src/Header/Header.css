@@ -1,0 +1,17 @@
+.header {
+  /* border: 2px solid red; */
+  height: 80px;
+  position: sticky;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.title {
+  /* border: 2px solid blue; */
+  position: inherit;
+  font-weight: bolder;
+  font-size: 32px;
+  margin-left: 50px;
+}

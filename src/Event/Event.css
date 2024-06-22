@@ -1,0 +1,65 @@
+.event-container {
+  /* border: 2px solid red; */
+  width: 75%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 30px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.event-date {
+  /* border: 2px solid blue; */
+  background-color: #6488ea;
+  color: #fff;
+  padding: 30px;
+  box-sizing: border-box; 
+  display: flex;
+  align-items: center;
+  border-radius: 5px 0 0 5px;
+  width: 150px;
+}
+
+.event-content {
+  /* border: 2px solid blue; */
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1; /* This allows .event-content to grow and shrink within its flex container */
+  overflow: hidden; /* Prevents content from overflowing */
+}
+
+.event-container, .event-date, .event-content {
+  height: 150px;
+}
+
+.event-title, .event-date-content, .event-place {
+  /* border: 2px solid red; */
+  margin: 0;
+  padding: 5px;
+}
+
+@media screen and (max-width: 850px) {
+  .event-container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .event-container {
+    flex-direction: column;
+    margin: 10px 0;
+    height: 350px;
+  }
+
+  .event-date {
+    width: 100%;
+    justify-content: center;
+    border-radius: 5px 5px 0 0;
+    margin: 0;
+  }
+}
