@@ -26,7 +26,7 @@ function AppContent() {
   };
 
   useEffect(() => {
-    // Sort sample_data by date in descending order
+    // Sort sample_data by date in ascending order
     const sortedEvents = [...sample_data].sort((a, b) => {
       return new Date(a.date) - new Date(b.date);
     });
