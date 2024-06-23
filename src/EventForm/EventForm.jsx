@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import './EventForm.css';
 import { getCurrentDateTime } from '../utils/getCurrentTime';
 // import { postEvent } from '../services/api-service';
@@ -7,53 +7,58 @@ export default function EventForm({ setEvents, events }) {
 
   const TITLE = 'Create a new event';
 
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState(getCurrentDateTime());
-  const [venue, setVenue] = useState('');
-  const [city, setCity] = useState('');
+  const initialState = {
+    title: '',
+    date: getCurrentDateTime(),
+    venue: '',
+    city: '',
+  };
 
-  function handleTitleChange(event) {
-    setTitle(event.target.value);
-  }
-  function handleDateChange(event) {
-    setDate(event.target.value);
-  }
-  function handleVenueChange(event) {
-    setVenue(event.target.value);
-  }
-  function handleCityChange(event) {
-    setCity(event.target.value);
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'SET_TITLE':
+        return { ...state, title: action.payload };
+      case 'SET_DATE':
+        return { ...state, date: action.payload };
+      case 'SET_VENUE':
+        return { ...state, venue: action.payload };
+      case 'SET_CITY':
+        return { ...state, city: action.payload };
+      case 'RESET_FORM':
+        return initialState;
+      default:
+        return state;
+    }
   }
 
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  function handleSubmit (event) { // when clicking the submit button
+  function handleChange(event) {
+    const { name, value } = event.target;
+    dispatch({ type: `SET_${name.toUpperCase()}`, payload: value });
+  }
+
+  function handleSubmit(event) {
     event.preventDefault();
 
-    // check if any of the input fields is empty
+    const { title, date, venue, city } = state;
+
     if (!title || !date || !venue || !city) {
       alert('Please fill in all fields.');
       return;
     }
 
-    // simulate posting event (replace with future API call)
     const newEvent = {
-      id: events.length + 1, // assign a new ID based on current events length
+      id: events.length + 1,
       title,
       date,
       venue,
       city,
     };
 
-    // update events array in parent component
     setEvents(prevEvents => [newEvent, ...prevEvents]);
 
-    // clear form fields
-    setTitle('');
-    setDate(getCurrentDateTime()); // reset date to current time
-    setVenue('');
-    setCity('');
-
-    
+    dispatch({ type: 'RESET_FORM' });
   }
 
   return (
@@ -62,22 +67,23 @@ export default function EventForm({ setEvents, events }) {
         <div className='form-title'>{TITLE}</div>
         <div className='input-container'>
           <div className='input-title'>TITLE</div>
-          <input type='text' placeholder='Insert a title' id="title" name='title' value={title} onChange={handleTitleChange} />
+          <input type='text' placeholder='Insert a title' name='title' value={state.title} onChange={handleChange} />
         </div>
         <div className='input-container'>
           <div className='input-title'>DATE</div>
-          <input type='datetime-local' id='date' value={date} onChange={handleDateChange} />
+          <input type='datetime-local' name='date' value={state.date} onChange={handleChange} />
         </div>
-        <div className='input-container'> 
+        <div className='input-container'>
           <div className='input-title'>VENUE</div>
-          <input type='text' placeholder='Insert a venue' id="venue" name='venue' value={venue} onChange={handleVenueChange} />
+          <input type='text' placeholder='Insert a venue' name='venue' value={state.venue} onChange={handleChange} />
         </div>
-        <div className='input-container'> 
+        <div className='input-container'>
           <div className='input-title'>CITY</div>
-          <input type='text' placeholder='Insert a city' id="city" name='city' value={city} onChange={handleCityChange} />
+          <input type='text' placeholder='Insert a city' name='city' value={state.city} onChange={handleChange} />
         </div>
         <button className='input-button'>Create</button>
       </form>
     </>
-  )
+  );
 }
+

@@ -1,7 +1,7 @@
 .next-container {
   width: 100%;
   padding: 30px;
-  background-color: #6488ea;
+  /* background-color: #6488ea; */
   color: #fff;
   box-sizing: border-box;
   margin-bottom: 30px;
@@ -15,4 +15,29 @@
   text-align: start;
   font-size: 14px;
   margin: 0;
+}
+
+.next-container {
+  background: linear-gradient(270deg, #6488ea, #eaa064, #ea64b0, #7fd44f);
+  background-size: 800% 800%;
+
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
