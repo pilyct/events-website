@@ -2,9 +2,9 @@ import React from 'react';
 import './Event.css';
 import moment from 'moment';
 
-export default function Event({ event }) {
+export default function Event({ event, themeStyles }) {
   return (
-    <div key={event.id} className='event-container' >
+    <div key={event.id} className='event-container' style={themeStyles} >
       <h2 className='event-date'>{moment(event.date).format('Do MMM')}</h2>
       <div className='event-content'>
         <h2 className='event-title'>{event.title}</h2>

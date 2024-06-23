@@ -2,12 +2,12 @@ import React from 'react';
 import './NextEvent.css';
 import moment from 'moment';
 
-export default function NextEvent({ event }) {
+export default function NextEvent({ event, themeStyles }) {
 
   const TITLE = 'NEXT EVENT'
 
   return (
-    <div className='next-container'>
+    <div className='next-container always-white-text' style={themeStyles}>
       <h5 className='next-title'>{TITLE}</h5>
       <div className='next-content'>
         <h2>{moment(event.date).format('Do MMM')}</h2>

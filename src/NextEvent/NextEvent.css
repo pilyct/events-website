@@ -5,10 +5,12 @@
   color: #fff;
   box-sizing: border-box;
   margin-bottom: 30px;
-
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 5px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
 
+.always-white-text {
+  color: #fff !important;
 }
 
 .next-title {
@@ -17,6 +19,7 @@
   margin: 0;
 }
 
+/* Background Gradient */
 .next-container {
   background: linear-gradient(270deg, #6488ea, #eaa064, #ea64b0, #7fd44f);
   background-size: 800% 800%;

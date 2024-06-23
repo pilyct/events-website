@@ -3,9 +3,10 @@ import './EventForm.css';
 import { getCurrentDateTime } from '../utils/getCurrentTime';
 // import { postEvent } from '../services/api-service';
 
-export default function EventForm({ setEvents, events }) {
+export default function EventForm({ setEvents, events, themeStyles }) {
 
   const TITLE = 'Create a new event';
+
 
   const initialState = {
     title: '',
@@ -63,23 +64,23 @@ export default function EventForm({ setEvents, events }) {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={themeStyles} id='form' name='form'>
         <div className='form-title'>{TITLE}</div>
         <div className='input-container'>
           <div className='input-title'>TITLE</div>
-          <input type='text' placeholder='Insert a title' name='title' value={state.title} onChange={handleChange} />
+          <input type='text' placeholder='Insert a title' id='title' name='title' value={state.title} onChange={handleChange} />
         </div>
         <div className='input-container'>
           <div className='input-title'>DATE</div>
-          <input type='datetime-local' name='date' value={state.date} onChange={handleChange} />
+          <input type='datetime-local' id='date' name='date' value={state.date} onChange={handleChange} />
         </div>
         <div className='input-container'>
           <div className='input-title'>VENUE</div>
-          <input type='text' placeholder='Insert a venue' name='venue' value={state.venue} onChange={handleChange} />
+          <input type='text' placeholder='Insert a venue' id='venue' name='venue' value={state.venue} onChange={handleChange} />
         </div>
         <div className='input-container'>
           <div className='input-title'>CITY</div>
-          <input type='text' placeholder='Insert a city' name='city' value={state.city} onChange={handleChange} />
+          <input type='text' placeholder='Insert a city' id='city' name='city' value={state.city} onChange={handleChange} />
         </div>
         <button className='input-button'>Create</button>
       </form>
