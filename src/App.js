@@ -13,15 +13,22 @@ function AppContent() {
   const darkTheme = useTheme();
   const toggleTheme = useThemeUpdate();
   const themeStyles = {
-    backgroundColor: darkTheme ? '#1c1c1c' : '#fff',
+    backgroundColor: darkTheme ? '#1f1f2f' : '#fff',
     color: darkTheme ? '#fff' : '#1f1f1f',
     // border: `2px solid ${darkTheme ? 'red' : 'blue'}`,
     boxShadow:  darkTheme ? 'rgba(5, 5, 5, 0.9) 0px 2px 6px 2px' : 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
     fill: darkTheme ? '#fff' : '#1f1f1f',
   };
 
+  // ONLY for App 
   const appBackgroundStyles = {
     backgroundColor: darkTheme ? '#111' : '#f1f1f1',
+    
+  };
+
+  // ONLY for Event and EventForm
+  const eventBackgroundStyles = {
+    backgroundColor: darkTheme ? '#6488ea' : '#1c1c1c',
     
   };
 
@@ -45,12 +52,12 @@ function AppContent() {
             <div className='list-container'>
               <NextEvent event={events[0]} themeStyles={themeStyles} />
               {events.slice(1).map((event) => {
-                return <Event key={event.id} event={event} themeStyles={themeStyles} />
+                return <Event key={event.id} event={event} themeStyles={themeStyles} eventBackgroundStyles={eventBackgroundStyles} />
               })}
             </div>
           </>
         }
-        <EventForm setEvents={setEvents} events={events} themeStyles={themeStyles} />
+        <EventForm setEvents={setEvents} events={events} themeStyles={themeStyles} eventBackgroundStyles={eventBackgroundStyles} />
       </main>
     </div>
   );

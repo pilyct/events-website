@@ -3,7 +3,7 @@ import './EventForm.css';
 import { getCurrentDateTime } from '../utils/getCurrentTime';
 // import { postEvent } from '../services/api-service';
 
-export default function EventForm({ setEvents, events, themeStyles }) {
+export default function EventForm({ setEvents, events, themeStyles, eventBackgroundStyles }) {
 
   const TITLE = 'Create a new event';
 
@@ -82,7 +82,7 @@ export default function EventForm({ setEvents, events, themeStyles }) {
           <div className='input-title'>CITY</div>
           <input type='text' placeholder='Insert a city' id='city' name='city' value={state.city} onChange={handleChange} />
         </div>
-        <button className='input-button'>Create</button>
+        <button className='input-button' style={eventBackgroundStyles}>Create</button>
       </form>
     </>
   );
