@@ -7,6 +7,10 @@ router.get('/events', controller.getEvents);
 // POST
 router.post('/events', controller.postEvent);
 
+// DELETE - Testing purposes
+router.delete('/events/:id', controller.deleteEvent); // OPTIONAL - only use in case you want to remove a data record
+
+
 
 
 module.exports = router;
