@@ -14,9 +14,17 @@
 }
 
 .next-title {
-  text-align: start;
-  font-size: 14px;
   margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.next-text {
+  font-size: 16px;
+  font-weight: 600;
+
 }
 
 /* Background Gradient */

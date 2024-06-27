@@ -39,7 +39,40 @@ async function postEvent(event) {
   }
 }
 
-module.exports = { getEvents, postEvent };
+
+// DELETE
+async function deleteEvent(eventId) {
+
+  try {
+    console.log('eventId: ', eventId)
+    const response = await fetch(`${URL}/events/${eventId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    console.log('Response Status: ', response.status);
+    console.log('Response Headers: ', response.headers);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Error response: ', errorText);
+      throw new Error(`Failed to delete the event: ${response.status} - ${errorText}`);
+    }
+
+    const data = await response.json();
+    console.log(data.message);
+    console.log(data);
+    return data;
+  } catch (e) {
+    console.error('Caught Error: ', e);
+    throw e; 
+  }
+
+}
+
+module.exports = { getEvents, postEvent, deleteEvent };
 
 // WITH SAMPLE_DATA
 // import { sample_data } from '../assets/sample_data';
