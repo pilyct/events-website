@@ -50,7 +50,7 @@ async function postEvent (req, res) {
 // DELETE (OPTIONAL - only use in case you want to remove a data record)
 async function deleteEvent (req, res) {
   try {
-    const id = req.params.id;
+    const id = req.params._id;
     const event = await Event.findById(id);
 
     if (!event) {
@@ -60,6 +60,7 @@ async function deleteEvent (req, res) {
     await event.deleteOne();
     res.json({message: 'Deleted topic successfully'});
   } catch (err) {
+    console.error('Error deleting event: ', err);
     res.status(500).json({message: err.message});
   }
 }
