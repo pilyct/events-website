@@ -1,15 +1,18 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { sample_data } from './assets/sample_data';
+// import { sample_data } from './assets/sample_data';
 import Header from './Header/Header';
 import EventForm from './EventForm/EventForm';
 import NextEvent from './NextEvent/NextEvent';
 import Event from './Event/Event';
 import { ThemeProvider, useTheme, useThemeUpdate } from './CustomAppTheme';
-// import { getEvents } from '../services/api-service'; // replace sample_data with future API call + adapt useEffect 
+import { getEvents } from './services/api-service'; // replace sample_data with future API call + adapt useEffect 
+import { PropagateLoader } from 'react-spinners';
 
 function AppContent() {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const darkTheme = useTheme();
   const toggleTheme = useThemeUpdate();
   const themeStyles = {
@@ -33,32 +36,50 @@ function AppContent() {
   };
 
   useEffect(() => {
-    // Sort sample_data by date in ascending order
-    const sortedEvents = [...sample_data].sort((a, b) => {
-      return new Date(a.date) - new Date(b.date);
-    });
+    getEvents()
+    .then(data => setEvents(data))
+    .catch(error => alert(error))
 
-    // Update state with sorted events
-    setEvents(sortedEvents);
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
+
+    // --- ONLY for sample_data
+    // Sort sample_data by date in ascending order
+    // const sortedEvents = [...sample_data].sort((a, b) => {
+    //   return new Date(a.date) - new Date(b.date);
+    // });
+
+    // // Update state with sorted events
+    // setEvents(sortedEvents);
+    
   }, []); // Dependency array is empty, so this effect runs only once after initial render
 
   return (
     <div className="App" style={{ ...themeStyles, ...appBackgroundStyles }}>
-      <Header themeStyles={themeStyles} toggleTheme={toggleTheme} />
-      {/* <button className='theme-button' onClick={toggleTheme}>Toggle Theme</button> */}
-      <main>
-        {events.length > 0 &&
-          <>
-            <div className='list-container'>
-              <NextEvent event={events[0]} themeStyles={themeStyles} />
-              {events.slice(1).map((event) => {
-                return <Event key={event.id} event={event} themeStyles={themeStyles} eventBackgroundStyles={eventBackgroundStyles} />
-              })}
-            </div>
-          </>
-        }
-        <EventForm setEvents={setEvents} events={events} themeStyles={themeStyles} eventBackgroundStyles={eventBackgroundStyles} />
-      </main>
+      { loading ?
+        <div className='spinner'>
+          <PropagateLoader color={'rgba(100,136,234,1)'} loading={loading} size={30} aria-label="Loading Spinner" />
+        </div>
+        :
+        <>
+        <Header themeStyles={themeStyles} toggleTheme={toggleTheme} />
+        <main>
+          {events.length > 0 &&
+            <>
+              <div className='list-container'>
+                <NextEvent event={events[0]} themeStyles={themeStyles} />
+                {events.slice(1).map((event) => {
+                  return <Event key={event._id} event={event} themeStyles={themeStyles} eventBackgroundStyles={eventBackgroundStyles} />
+                })}
+              </div>
+            </>
+          }
+          <EventForm setEvents={setEvents} events={events} themeStyles={themeStyles} eventBackgroundStyles={eventBackgroundStyles} />
+        </main>
+        </>
+      }
     </div>
   );
 }

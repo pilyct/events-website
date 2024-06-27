@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.spinner {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 main {
   /* border: 2px solid red; */
   display: flex;
