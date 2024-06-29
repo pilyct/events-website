@@ -75,7 +75,7 @@ async function deleteEvent(eventId) {
 // UPDATE
 async function editEvent(eventId, event) {
   try {
-    console.log('eventId: ', eventId)
+    // console.log('eventId: ', eventId)
     const response = await fetch(`${URL}/events/edit/${eventId}`, {
       method: 'PUT',
       headers: {
@@ -83,11 +83,7 @@ async function editEvent(eventId, event) {
       },
       body: JSON.stringify(event)
     });
-    console.log('response: ', response)
-
-    console.log('Response Status: ', response.status);
-    console.log('Response Headers: ', response.headers);
-
+  
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

@@ -25,7 +25,7 @@ function AppContent() {
   };
 
   const appBackgroundStyles = {
-    backgroundColor: darkTheme ? '#111' : '#f1f1f1',
+    backgroundColor: darkTheme ? '#111' : '#eaeaea',
   };
 
   const eventBackgroundStyles = {

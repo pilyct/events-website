@@ -24,8 +24,15 @@
 .next-text {
   font-size: 16px;
   font-weight: 600;
-
 }
+
+.next-buttons {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 40px;
+}
+
 
 /* Background Gradient */
 .next-container {

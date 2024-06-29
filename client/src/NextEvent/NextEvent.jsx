@@ -12,7 +12,7 @@ export default function NextEvent({ event, themeStyles, editButtonStyle, deleteB
     <div className='next-container always-white-text' style={themeStyles}>
       <div className='next-title'>
         <div className='next-text'>{TITLE}</div>
-        <div>
+        <div className='next-buttons'>
           <DeleteButton eventId={event._id} deleteStyle={deleteButtonStyle} onDelete={onDelete} />
           <EditButton eventId={event._id} editStyle={editButtonStyle} onEdit={onEdit} />
         </div>
