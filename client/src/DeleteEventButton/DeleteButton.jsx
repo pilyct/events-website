@@ -4,7 +4,7 @@ export default function DeleteButton({ themeStyles, onDelete}) {;
 
  
   return (
-    <button className='deleteButton' onClick={onDelete} themeStyles={themeStyles}>
+    <button className='deleteButton' onClick={onDelete} themestyles={themeStyles}>
       <svg className="icon" width="18px" height="18px" viewBox="-3.5 0 19 19" xmlns="http://www.w3.org/2000/svg">
         <path 
           // fill={themeStyles.fill} 

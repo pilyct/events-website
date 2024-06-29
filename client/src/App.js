@@ -40,6 +40,7 @@ function AppContent() {
 
   
   const handleDeleteEvent = async (eventIdToDelete) => {
+    console.log("Event ID to delete:", eventIdToDelete);
     const confirmed = window.confirm("Are you sure you want to delete this event?");
     
     if (!confirmed) {
@@ -72,7 +73,7 @@ function AppContent() {
             {events.length > 0 && (
               <>
                 <div className='list-container'>
-                  <NextEvent event={events[0]} themeStyles={themeStyles} />
+                  <NextEvent event={events[0]} themeStyles={themeStyles} onDelete={() => handleDeleteEvent(events[0]._id)} />
                   {events.slice(1).map((event) => (
                     <Event
                       key={event._id}

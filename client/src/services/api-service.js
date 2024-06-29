@@ -25,13 +25,13 @@ async function postEvent(event) {
       },
       body: JSON.stringify(event)
     })
-    // console.log('Client Service Response: ', response)
+    console.log('Client Service Response: ', response)
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    // console.log('Client Service Data Response: ', data)
+    console.log('Client Service Data Response: ', data)
     return data;
   } catch (e) {
     console.error(e);
@@ -52,8 +52,8 @@ async function deleteEvent(eventId) {
       },
     });
 
-    console.log('Response Status: ', response.status);
-    console.log('Response Headers: ', response.headers);
+    // console.log('Response Status: ', response.status);
+    // console.log('Response Headers: ', response.headers);
 
     if (!response.ok) {
       const errorText = await response.text();
