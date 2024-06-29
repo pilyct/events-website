@@ -50,7 +50,7 @@ async function postEvent(req, res) {
 
 
 
-// DELETE (OPTIONAL - only use in case you want to remove a data record)
+// DELETE 
 async function deleteEvent (req, res) {
   try {
     // console.log('Request Params:', req.params);
@@ -64,12 +64,45 @@ async function deleteEvent (req, res) {
     }
 
     await event.deleteOne();
-    res.json({message: 'Deleted topic successfully'});
+    res.json({message: 'Event deleted successfully'});
   } catch (err) {
     console.error('Error deleting event: ', err);
     res.status(500).json({message: err.message});
   }
 }
 
+/// UPDATE
+async function editEvent(req, res) {
+  try {
+    const id = req.params._id;
+    const { title, date, venue, city } = req.body;
 
-module.exports = { getEvents, postEvent, deleteEvent };
+    if (!title || !date || !venue || !city) {
+      return res.status(400).json({ message: "Please provide all required fields: title, date, venue, city" });
+    }
+
+    const updatedEvent = await Event.findByIdAndUpdate(
+      id,
+      { title, date, venue, city },
+      { new: true }
+    );
+
+    if (!updatedEvent) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+
+    res.status(200).json(updatedEvent);
+    console.log('Event edited successfully');
+    
+  } catch (err) {
+    console.error('Error updating event:', err);
+    if (err.name === 'ValidationError') {
+      const errors = Object.values(err.errors).map(error => error.message);
+      return res.status(400).json({ message: `Validation error: ${errors.join(', ')}` });
+    }
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
+
+
+module.exports = { getEvents, postEvent, deleteEvent, editEvent };

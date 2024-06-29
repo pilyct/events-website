@@ -5,11 +5,13 @@ const controller = require('./controllers/eventController');
 router.get('/events', controller.getEvents);
 
 // POST
-router.post('/events', controller.postEvent);
+router.post('/events/add', controller.postEvent);
 
-// DELETE - Testing purposes
-router.delete('/events/:_id', controller.deleteEvent); // OPTIONAL - only use in case you want to remove a data record
+// DELETE 
+router.delete('/events/:_id', controller.deleteEvent);
 
+// UPDATE
+router.put('/events/edit/:_id', controller.editEvent);
 
 
 
