@@ -1,7 +1,9 @@
-
 import './Header.css';
+import { useTheme, useThemeUpdate } from '../CustomAppTheme';
 
-export default function Header({ themeStyles, toggleTheme }) {
+export default function Header({ themeStyles }) {
+  const darkTheme = useTheme();
+  const toggleTheme = useThemeUpdate();
 
   return (
     <div className='header' style={themeStyles}>
@@ -13,13 +15,13 @@ export default function Header({ themeStyles, toggleTheme }) {
           Eventify
         </div>
         <div className='theme-button'>
-          <label className="switch" >
-            <input type="checkbox" onClick={toggleTheme} />
-            <span className="slider round">
-            </span>
+          <label className="switch">
+            <input type="checkbox" checked={darkTheme} onChange={toggleTheme} />
+            <span className="slider round"></span>
           </label>
+          {/* <span className="switch-label">{darkTheme ? 'Dark Theme' : 'Light Theme'}</span> */}
         </div>
       </div>
     </div>
-  )
+  );
 }

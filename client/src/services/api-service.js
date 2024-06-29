@@ -18,14 +18,14 @@ async function getEvents() {
 // POST
 async function postEvent(event) {
   try {
-    const response = await fetch(`${URL}/events`, {
+    const response = await fetch(`${URL}/events/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(event)
     })
-    console.log('Client Service Response: ', response)
+    // console.log('Client Service Response: ', response)
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -42,9 +42,8 @@ async function postEvent(event) {
 
 // DELETE
 async function deleteEvent(eventId) {
-
   try {
-    console.log('eventId: ', eventId)
+    // console.log('eventId: ', eventId)
     const response = await fetch(`${URL}/events/${eventId}`, {
       method: 'DELETE',
       headers: {
@@ -72,34 +71,37 @@ async function deleteEvent(eventId) {
 
 }
 
-module.exports = { getEvents, postEvent, deleteEvent };
 
-// WITH SAMPLE_DATA
-// import { sample_data } from '../assets/sample_data';
+// UPDATE
+async function editEvent(eventId, event) {
+  try {
+    console.log('eventId: ', eventId)
+    const response = await fetch(`${URL}/events/edit/${eventId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(event)
+    });
+    console.log('response: ', response)
 
-// // GET
-// async function getEvents() {
-//   try {
-//     return sample_data;
-//   } catch (e) {
-//     console.log(e);
-//   }
-// }
+    console.log('Response Status: ', response.status);
+    console.log('Response Headers: ', response.headers);
 
-// // POST
-// async function postEvent(title, date, venue, city) {
-//   try {
-//     // Create a new event object
-//     const newEvent = { title, date, venue, city };
-    
-//     // Add the new event to the sample data array
-//     sample_data.push(newEvent);
-    
-//     // Return the new event
-//     return newEvent;
-//   } catch (e) {
-//     console.log(e);
-//   }
-// }
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-// export { getEvents, postEvent };
+    const data = await response.json();
+    console.log(data.message);
+    console.log(data);
+    return data;
+  } catch (e) {
+    console.error('Caught Error: ', e);
+    throw e; 
+  }
+
+}
+
+
+module.exports = { getEvents, postEvent, deleteEvent, editEvent };

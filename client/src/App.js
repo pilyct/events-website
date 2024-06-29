@@ -11,7 +11,10 @@ import { PropagateLoader } from 'react-spinners';
 function AppContent() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [eventToEdit, setEventToEdit] = useState(null);  // state to track the event being edited
 
+
+  // THEME STYLE
   const darkTheme = useTheme();
   const toggleTheme = useThemeUpdate();
 
@@ -19,7 +22,6 @@ function AppContent() {
     backgroundColor: darkTheme ? '#1f1f2f' : '#fff',
     color: darkTheme ? '#fff' : '#1f1f1f',
     boxShadow: darkTheme ? 'rgba(5, 5, 5, 0.9) 0px 2px 6px 2px' : 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
-    fill: darkTheme ? '#fff' : '#1f1f1f',
   };
 
   const appBackgroundStyles = {
@@ -30,6 +32,21 @@ function AppContent() {
     backgroundColor: darkTheme ? '#6488ea' : '#1c1c1c',
   };
 
+  const deleteButtonStyle = {
+    fill: darkTheme ? '#fff' : '#1f1f1f',
+    stroke: 'none'
+  }
+
+  const editButtonStyle = {
+    stroke: darkTheme ? '#fff' : '#1f1f1f',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    fill: 'none',
+  }
+  
+
+  // GET DATA
   useEffect(() => {
     setLoading(true);
     getEvents()
@@ -38,7 +55,7 @@ function AppContent() {
       .finally(() => setLoading(false));
   }, []);
 
-  
+  // DELETE
   const handleDeleteEvent = async (eventIdToDelete) => {
     console.log("Event ID to delete:", eventIdToDelete);
     const confirmed = window.confirm("Are you sure you want to delete this event?");
@@ -60,8 +77,21 @@ function AppContent() {
     }
   };
 
+  // UPDATE
+  const handleEditEvent = (eventIdToEdit) => {
+    console.log("Event ID to edit:", eventIdToEdit);
+    const event = events.find(event => event._id === eventIdToEdit);
+    if (event) {
+      setEventToEdit(event);
+    }
+  };
+
+  const clearEventToEdit = () => {
+    setEventToEdit(null);
+  };
+
   return (
-    <div className="App" style={{ ...themeStyles, ...appBackgroundStyles }}>
+    <div className="App" style={{ ...themeStyles, ...appBackgroundStyles, ...editButtonStyle, ...deleteButtonStyle }}>
       {loading ? (
         <div className='spinner'>
           <PropagateLoader color={'rgba(100,136,234,1)'} loading={loading} size={30} aria-label="Loading Spinner" />
@@ -73,20 +103,30 @@ function AppContent() {
             {events.length > 0 && (
               <>
                 <div className='list-container'>
-                  <NextEvent event={events[0]} themeStyles={themeStyles} onDelete={() => handleDeleteEvent(events[0]._id)} />
+                  <NextEvent event={events[0]} themeStyles={themeStyles} editButtonStyle={editButtonStyle} deleteButtonStyle={deleteButtonStyle} onDelete={() => handleDeleteEvent(events[0]._id)} onEdit={() => handleEditEvent(events[0]._id)} />
                   {events.slice(1).map((event) => (
                     <Event
                       key={event._id}
                       event={event}
                       themeStyles={themeStyles}
                       eventBackgroundStyles={eventBackgroundStyles}
+                      editButtonStyle={editButtonStyle}
+                      deleteButtonStyle={deleteButtonStyle}
                       onDelete={() => handleDeleteEvent(event._id)}
+                      onEdit={() => handleEditEvent(event._id)} 
                     />
                   ))}
                 </div>
               </>
             )}
-            <EventForm setEvents={setEvents} events={events} themeStyles={themeStyles} eventBackgroundStyles={eventBackgroundStyles} />
+            <EventForm 
+              setEvents={setEvents} 
+              events={events} 
+              themeStyles={themeStyles} 
+              eventBackgroundStyles={eventBackgroundStyles}
+              eventToEdit={eventToEdit} 
+              clearEventToEdit={clearEventToEdit} 
+            />
           </main>
         </>
       )}

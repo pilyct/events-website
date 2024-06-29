@@ -1,21 +1,28 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react';
 
-const ThemeContext = React.createContext()
-const ThemeUpdateContext = React.createContext()
+const ThemeContext = React.createContext();
+const ThemeUpdateContext = React.createContext();
 
 export function useTheme() {
-  return useContext(ThemeContext)
+  return useContext(ThemeContext);
 }
 
 export function useThemeUpdate() {
-  return useContext(ThemeUpdateContext)
+  return useContext(ThemeUpdateContext);
 }
 
-export function ThemeProvider({children}) {
-  const [darkTheme, setDarkTheme] = useState(true) // darktheme is enabled? True
+export function ThemeProvider({ children }) {
+  const [darkTheme, setDarkTheme] = useState(() => {
+    const storedTheme = localStorage.getItem('theme');
+    return storedTheme ? JSON.parse(storedTheme) : true; // Default to true if no stored theme
+  });
+
+  useEffect(() => {
+    localStorage.setItem('theme', JSON.stringify(darkTheme));
+  }, [darkTheme]);
 
   function toggleTheme() {
-    setDarkTheme(prevDarkTheme => !prevDarkTheme)
+    setDarkTheme(prevDarkTheme => !prevDarkTheme);
   }
 
   return (
@@ -24,5 +31,5 @@ export function ThemeProvider({children}) {
         {children}
       </ThemeUpdateContext.Provider>
     </ThemeContext.Provider>
-  )
+  );
 }

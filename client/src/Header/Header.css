@@ -1,5 +1,4 @@
 .header {
-  /* border: 2px solid red; */
   height: 80px;
   position: sticky;
   top: 0;
@@ -18,7 +17,7 @@
 }
 
 .title {
-  position: relative; /* Ensure the element can contain absolutely positioned children */
+  position: relative; 
   font-weight: bolder;
   font-size: 32px;
   display: inline-flex;
@@ -26,13 +25,13 @@
   align-items: center;
 }
 
-
 .theme-button {
   background-color: transparent;
   border: none;
+  display: flex;
+  align-items: center;
 }
 
-/* The switch - the box around the slider */
 .switch {
   position: relative;
   display: inline-block;
@@ -42,14 +41,12 @@
   border: none;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-/* The slider */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -57,30 +54,29 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #6488ea;
+  background-color: #1f1f1f;
   -webkit-transition: .4s;
   transition: .4s;
 }
 
 .slider:before {
   position: absolute;
-  content: url('../../public/sun.svg');
+  content: url('../../public/moon.svg');
   height: 26px;
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: #fff;
   -webkit-transition: .4s;
   transition: .4s;
 }
 
-/* Change content to moon when slider is not checked */
 .switch input:not(:checked) + .slider:before {
-  content: url('../../public/moon.svg'); 
+  content: url('../../public/sun.svg'); 
 }
 
 input:checked + .slider {
-  background-color: #1f1f1f;
+  background-color: #6488ea;
 }
 
 input:focus + .slider {
@@ -93,11 +89,16 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-/* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.switch-label {
+  margin-left: 10px; /* Adjust spacing as needed */
+  font-size: 16px; /* Adjust font size as needed */
+  color: inherit; /* Ensures the label text color matches the theme */
 }

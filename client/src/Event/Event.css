@@ -35,7 +35,13 @@
  
 }
 
-.event-delete-btn {
+.event-buttons {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px 10px 10px;
+}
+
+.event-delete-btn, .event-edit-btn {
   /* border: 2px solid blue; */
   width: 40px;
   box-sizing: border-box; 

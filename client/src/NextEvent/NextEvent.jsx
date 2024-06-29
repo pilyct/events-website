@@ -2,8 +2,9 @@ import React from 'react';
 import './NextEvent.css';
 import moment from 'moment';
 import DeleteButton from '../DeleteEventButton/DeleteButton';
+import EditButton from '../EditEventButton/EditButton';
 
-export default function NextEvent({ event, themeStyles, onDelete }) {
+export default function NextEvent({ event, themeStyles, editButtonStyle, deleteButtonStyle, onDelete, onEdit }) {
 
   const TITLE = 'NEXT EVENT'
 
@@ -11,7 +12,10 @@ export default function NextEvent({ event, themeStyles, onDelete }) {
     <div className='next-container always-white-text' style={themeStyles}>
       <div className='next-title'>
         <div className='next-text'>{TITLE}</div>
-        <DeleteButton eventId={event._id} style={themeStyles} onDelete={onDelete} />
+        <div>
+          <DeleteButton eventId={event._id} deleteStyle={deleteButtonStyle} onDelete={onDelete} />
+          <EditButton eventId={event._id} editStyle={editButtonStyle} onEdit={onEdit} />
+        </div>
       </div>
       <div className='next-content'>
         <h2>{moment(event.date).format('Do MMM')}</h2>
