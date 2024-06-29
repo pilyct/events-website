@@ -13,7 +13,7 @@ async function getEvents (req, res) {
 
 
 // POST
-async function postEvent (req, res) {
+async function postEvent(req, res) {
   const { title, date, venue, city } = req.body;
 
   // console.log('Request body:', req.body);
@@ -23,7 +23,7 @@ async function postEvent (req, res) {
     if (!title || !date || !venue || !city) {
       return res.status(400).json({ message: "Please provide all required fields: title, date, venue, city" });
     }
-    c
+    
     const event = new Event({
       title,
       date,
@@ -31,27 +31,33 @@ async function postEvent (req, res) {
       city,
     });
 
-    // console.log('Server post new event: ', event)
+    // console.log('Server post new event: ', event);
 
     const newEvent = await event.save();
     res.status(201).json(newEvent);
   } catch (err) {
+    console.error('Error while saving event:', err);
+
     // Check for specific validation errors from Mongoose
     if (err.name === 'ValidationError') {
       const errors = Object.values(err.errors).map(error => error.message);
       return res.status(400).json({ message: `Validation error: ${errors.join(', ')}` });
     }
-    res.status(500).json({ message: err.message });
+    
+    res.status(500).json({ message: 'Internal Server Error' });
   }
-
 }
+
 
 
 // DELETE (OPTIONAL - only use in case you want to remove a data record)
 async function deleteEvent (req, res) {
   try {
+    // console.log('Request Params:', req.params);
     const id = req.params._id;
     const event = await Event.findById(id);
+    // console.log('Event: ', Event)
+    // console.log('Event by Id', event)
 
     if (!event) {
       return res.status(404).send('Cannot find event');
