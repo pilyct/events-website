@@ -2,10 +2,10 @@
 
 Eventify is a comprehensive full-stack application designed to manage events effortlessly. This repository provides functionalities to track, publish, edit, and delete upcoming events seamlessly. Built with a user-friendly interface and robust backend, Eventify ensures smooth event management from creation to updates and removal, making it an ideal solution for event organizers and planners.
 
-<div style="text-align: center"><img src="./client/public/Eventify.gif" width="600" height="338" style="border: 2px solid black" /></div>
+<p align="center"><img src="./client/public/Eventify.gif" width="800" height="538" style="border: 2px solid black" /></p>
 
 ### Light & Dark Theme:
-<p align-"center">
+<p align="center">
 <img src="./client/public/lightTheme.png" width="600" height="338" />
 <img src="./client/public/darkTheme.png" width="600" height="338" />
 </p>
