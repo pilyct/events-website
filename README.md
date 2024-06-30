@@ -4,12 +4,11 @@ Eventify is a comprehensive full-stack application designed to manage events eff
 
 <div style="text-align: center"><img src="./client/public/Eventify.gif" width="600" height="338" style="border: 2px solid black" /></div>
 
-#### Light Theme
+### Light & Dark Theme:
+<p align-"center">
 <img src="./client/public/lightTheme.png" width="600" height="338" />
-
-
-#### Dark Theme
 <img src="./client/public/darkTheme.png" width="600" height="338" />
+</p>
 
 
 
@@ -17,16 +16,19 @@ Eventify is a comprehensive full-stack application designed to manage events eff
 # ✨Tech Stack
 
 ### BACKEND
-
+<p align-"left">
 <img src="https://img.shields.io/badge/node.js-87bf01?style=for-the-badge&logo=node.js&logoColor=white">
 <img src="https://img.shields.io/badge/express-f5f5f5?style=for-the-badge&logo=express&logoColor=black">
+</p>
 
 ### FRONTEND
-
+<p align-"left"> 
 <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB">
 <img src="https://img.shields.io/badge/css-254bdd?style=for-the-badge&logo=css3&logoColor=white">
+</p>
 
 ### DATABASE
-
+<p align-"left">
 <img src="https://img.shields.io/badge/mongodb-4caf50?style=for-the-badge&logo=mongodb&logoColor=white">
 <img src="https://img.shields.io/badge/mongoose-red?style=for-the-badge&logo=mongoose&logoColor=white">
+</p>
